@@ -1,0 +1,17 @@
+a = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','y','z']
+b = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','y','z']
+x = str(input())
+for i in range(len(x)):
+    if x[i] in a:
+        for k in range(len(a)):
+            if x[i] == a[k]:
+                a[k] = str(i)
+for k in range(len(a)):
+    if a[k] in b:
+        a[k] = str(-1)
+    print(a[k], end = ' ')
+    
+**다른 답안**
+1. chr()
+2. try, except
+3. *list, sep=" "
