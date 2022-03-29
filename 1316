@@ -1,0 +1,13 @@
+N = int(input()) //테스트 케이스 개수
+a = 0 // 그룹단어 개수
+for i in range(N):
+    x = str(input())
+    oo = 0 // 연속적으로 같은 문자가 있지 않은 경우
+    for k in range(len(x)):
+        if k + 2 < len(x) and x[k] != x[k+1]: //연속적으로 있는 수를 제외해야함
+            for l in range(k+2,len(x)):
+                if x[k] == x[l]:
+                    oo  += 1
+    if oo == 0:
+        a+=1
+print(a)
