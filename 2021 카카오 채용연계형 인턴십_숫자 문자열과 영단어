@@ -1,0 +1,12 @@
+def solution(s):
+    list = {'zero':0,'one':1,'two':2,'three':3,'four':4,'five':5,'six':6,'seven':7,'eight':8,'nine':9}
+    k = s
+    for i in range(len(s)):
+        if i+3<=len(s) and (s[i:i+3] in list.keys()): //세자리 문자
+            k= k.replace(s[i:i+3],str(list[s[i:i+3]]))
+        elif i+4<=len(s) and (s[i:i+4] in list.keys()): //네자리 문자
+            k= k.replace(s[i:i+4],str(list[s[i:i+4]]))
+        elif i + 5 <= len(s) and (s[i:i + 5] in list.keys()): //다섯자리 문자
+            k = k.replace(s[i:i + 5], str(list[s[i:i + 5]]))
+    answer = int(k) //문자열을 숫자로 변경
+    return answer
