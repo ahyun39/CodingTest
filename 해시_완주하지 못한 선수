@@ -1,0 +1,10 @@
+//효율성 문제 (시간초과)
+def solution(participant, completion):
+    p = sorted(participant,reverse=True)
+    c = sorted(completion)
+    for i in range(len(participant)):
+        if p[i] in c:
+            c.pop()
+        else:
+            answer = p[i]
+    return answer
