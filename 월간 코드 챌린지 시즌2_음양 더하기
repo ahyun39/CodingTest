@@ -1,0 +1,6 @@
+def solution(absolutes, signs):
+    for i in range(len(absolutes)):
+        if signs[i] != (absolutes[i]==absolutes[i]): // signs의 값과 다르면
+            absolutes[i] = (-absolutes[i]) // absolutes의 원소값을 음수로 변경
+    answer = sum(absolutes)
+    return answer
