@@ -1,0 +1,25 @@
+def solution(answers):
+    f = [1,2,3,4,5] // 수포자1
+    f2 = [2,1,2,3,2,4,2,5] // 수포자2
+    f3 = [3,3,1,1,2,2,4,4,5,5] // 수포자3
+    score = [0,0,0] // 각자 맞은 개수
+    answer = [] // 가장 문제를 많이 맞힌 사람
+    for i in range(len(answers)):
+        if answers[i] == f[i%len(f)]:
+            score[0] += 1
+        if answers[i] == f2[i%len(f2)]:
+            score[1] += 1
+        if answers[i] == f3[i%len(f3)]:
+            score[2] += 1
+    for k in range(3):
+        if score[k] == max(score):
+            answer.append(k+1)
+    answer.sort()
+    return answer
+    
+// 다른 풀이... ( 13줄까지는 동일 )
+for idx, s in enumerate(score):
+    if s == max(score):
+        result.append(idx+1)
+
+return result
