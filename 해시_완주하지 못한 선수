@@ -8,3 +8,15 @@ def solution(participant, completion):
         else:
             answer = p[i]
     return answer
+
+//효율성 통과
+def solution(participant, completion):
+    participant.sort()
+    completion.sort()
+    for i in range(len(completion)):
+        if participant[i] != completion[i]: // 완주하지 못한 선수 바로 
+            answer = participant[i]
+            break
+        else:
+            answer = participant[i+1]
+    return answer
