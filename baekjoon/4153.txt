@@ -1,0 +1,19 @@
+
+   
+while True:
+    alist = []
+    a, b, c = map(int, input().split())
+    alist.append(a)
+    alist.append(b)
+    alist.append(c)
+    if a == 0 and b == 0 and c == 0:
+        break
+    t = max(alist)
+    alist.remove(t)
+    t = t**2
+    for i in alist:
+        t -= i**2
+    if t == 0:
+        print("right")
+    elif t != 0:
+        print("wrong")
