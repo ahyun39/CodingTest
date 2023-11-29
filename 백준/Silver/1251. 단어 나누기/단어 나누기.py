@@ -10,3 +10,8 @@ for i in combinations(idx_list,3):
     change_word.append(ra+rb+rc)
 change_word.sort()
 print(change_word[0])
+
+## python string reverse
+string = 'abc'
+reverse_string = string[::-1]
+print(reverser_string) # cba
