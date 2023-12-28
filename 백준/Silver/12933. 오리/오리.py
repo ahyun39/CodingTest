@@ -11,8 +11,9 @@ for i in range(1,sound.count("q")+1):
 
     if t == 0 and i != sound[-1] and i in sound:
         ducks.append(i)
-    elif t == 5 and i == sound[-1]:
+    elif t == 5:
         ducks.append(i)
+        
 temp = set(sound)
 if list(temp) == ducks:
     print(max(ducks))
