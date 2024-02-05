@@ -3,11 +3,7 @@ from itertools import permutations
 N = int(input())
 items = [str(i) for i in range(1,10)]
 ans = 0
-it = []
-for i in range(N):
-    num, strike, ball = map(int,input().split())
-    it.append([num, strike, ball])
-
+it = [list(map(int,input().split())) for _ in range(N)]
 all_num = list(permutations(list(items),3))
 
 def baseball(num, it):
@@ -27,6 +23,6 @@ def baseball(num, it):
     return True
 
 for num in all_num:
-    if baseball(num, it):
-        ans += 1
+    if baseball(num, it): ans += 1
+    
 print(ans)
