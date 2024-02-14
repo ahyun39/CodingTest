@@ -9,9 +9,5 @@ def calculate_combination(n, r):
         result //= (i + 1)
     return result
 
-if N - 1 < M:
-    ans = calculate_combination(N - 1 + M, N - 1)
-else:
-    ans = calculate_combination(N - 1 + M, M)
-
+ans = calculate_combination(N - 1 + M, min(N - 1, M))
 print(ans)
