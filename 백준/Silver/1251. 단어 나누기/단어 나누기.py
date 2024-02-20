@@ -1,17 +1,7 @@
-from itertools import combinations
-word = str(input())
-idx_list = [i for i in range(len(word))]
-change_word = []
-for i in combinations(idx_list,3):
-    # divide to three words
-    a, b, c = word[:idx_list[i[0]]+1], word[idx_list[i[0]]+1:idx_list[i[1]]+1], word[idx_list[i[1]]+1:]
-    # reverse
-    ra, rb, rc = a[::-1], b[::-1], c[::-1]
-    change_word.append(ra+rb+rc)
-change_word.sort()
-print(change_word[0])
-
-## python string reverse
-string = 'abc'
-reverse_string = string[::-1]
-print(reverser_string) # cba
+s = list(str(input()))
+ans = 'z'*50
+for i in range(1,len(s)-1):
+    for j in range(i+1,len(s)):
+        a, b, c = list(reversed(s[:i])), list(reversed(s[i:j])), list(reversed(s[j:]))
+        ans = min(ans,''.join(a+b+c))
+print(ans)
