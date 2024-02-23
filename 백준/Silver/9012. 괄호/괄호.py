@@ -1,21 +1,17 @@
 import sys
-input = sys.stdin.readline
 
-n = int(input())
-for _ in range(n):
-    left = []
-    right = []
-    par = str(input())
-    for i in range(len(par)):
-        if par[i] == '(':
-            left.append(par[i])
-        elif par[i] == ')':
-            if left != []:
-                left.pop()
+def is_right(brackets):
+    stack = []
+    for bracket in brackets:
+        if bracket == "(":
+            stack.append("(")
+        else:
+            if stack:
+                stack.pop()
             else:
-                right.append(par[i])
-                break
-    if right != [] or left != []:
-        print("NO")
-    else:
-        print("YES")
+                return False
+    return len(stack) == 0
+
+for _ in range(int(sys.stdin.readline().rstrip())):
+    brackets = sys.stdin.readline().rstrip()
+    print("YES" if is_right(brackets) else "NO")
