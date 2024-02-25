@@ -1,15 +1,8 @@
-par = str(input())
-answer = 0
-
-pipes = []
-for i in range(len(par)):
-    if par[i] == '(':
-        pipes.append('(')
+n = str(input())
+stack, ans = 0, 0
+for i in range(len(n)):
+    if n[i] == "(": stack += 1
     else:
-        if par[i-1] == '(': # 레이저
-            pipes.pop()
-            answer += len(pipes)
-        else: 
-            pipes.pop()
-            answer += 1
-print(answer)
+        stack -= 1
+        ans += stack if n[i-1] == "(" else 1
+print(ans)
