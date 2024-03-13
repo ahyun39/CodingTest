@@ -1,4 +1,3 @@
-from itertools import combinations
 def solution(elements):
     s = set(elements)
     l = len(elements)
