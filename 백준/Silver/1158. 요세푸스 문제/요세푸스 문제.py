@@ -1,15 +1,10 @@
 n, k = map(int,input().split())
-people = [i+1 for i in range(n)]
+people = list(range(1, n+1))
 output = []
+
 while people:
-    if len(people) >= k:
-        out = people[k-1]
-        after = people[k:] + people[:k-1]
-        people = after
-    else:
-        out = people[(k-1)%len(people)]
-        idx = (k-1)%len(people)
-        after = people[idx+1:] + people[:idx]
-        people = after
-    output.append(out)
+    idx = (k-1) if len(people) >= k else (k-1) % (len(people))
+    output += [people[idx]]
+    people = people[idx+1:] + people[:idx]
+
 print(str(output).replace('[','<').replace(']','>'))
