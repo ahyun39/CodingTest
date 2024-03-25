@@ -11,8 +11,7 @@ for i in range(r):
                 nx, ny = i + dx, j + dy
                 if 0 <= nx < r and 0 <= ny < c:
                     if board[nx][ny] == ".": cnt += 1
-                else:
-                    cnt += 1
+                else: cnt += 1
             if cnt >= 3:
                 after_50[i][j] = "."
 
