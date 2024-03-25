@@ -1,7 +1,6 @@
-import copy
 r, c = map(int,input().split())
 board = [list(input()) for _ in range(r)]
-after_50 = copy.deepcopy(board)
+after_50 = [row[:] for row in board]
 
 for i in range(r):
     for j in range(c):
