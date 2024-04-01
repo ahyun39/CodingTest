@@ -2,8 +2,8 @@ from itertools import permutations
 
 def solution(expression):
     answer = 0
-    expressions = []
-    operators = []
+    # expression에서 숫자와 연산자 분리
+    expressions, operators = [], []
     w = ""
     for i in range(len(expression)):
         if expression[i] not in ["-","+","*"]:
@@ -14,6 +14,7 @@ def solution(expression):
             w = ""
     expressions.append(int(w))
     
+    # 조합을 이용해서 연산자 우선순위대로 연산
     operator_set = set(operators)
     len_operator = len(operator_set)
     for operator in permutations(operator_set,len_operator):
