@@ -1,28 +1,40 @@
-import sys
-sys.setrecursionlimit(10000)
+from collections import deque
 
-def dfs(x, y):
-    dx = [0, 0, -1, 1]
-    dy = [1, -1, 0, 0]
-    
-    for i in range(4):
-        nx = x + dx[i]
-        ny = y + dy[i]
-        if (0 <= nx < m) and (0 <= ny < n):
-            if field[ny][nx] == 1:
-                field[ny][nx] = 0
-                dfs(nx, ny)
-                
-for _ in range(int(sys.stdin.readline())):
-    m, n, k = map(int, sys.stdin.readline().split())
-    field = [[0 for _ in range(m)] for _ in range(n)]
-    count = 0
+t = int(input())
+for _ in range(t):
+    m, n, k =  map(int,input().split())
+    board = [[0]*m for _ in range(n)]
     for _ in range(k):
-        x, y = map(int, sys.stdin.readline().split())
-        field[y][x] = 1
-    for x in range(m):
-        for y in range(n):
-            if field[y][x] == 1:
-                dfs(x, y)
-                count += 1
-    print(count)
+        a, b = map(int,input().split())
+        board[b][a] = 1
+
+    def bfs(x,y,visited):
+        q = deque()
+        q.append((x,y))
+        while q:
+            x, y = q.popleft()
+            visited[x][y] = True
+            board[x][y] = 0
+            for dx, dy in [(-1,0),(0,1),(1,0),(0,-1)]:
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < n and 0 <= ny < m and board[nx][ny] == 1 and not visited[nx][ny]:
+                    q.append((nx,ny))
+                    visited[nx][ny] = True
+                    board[nx][ny] = 0
+        return visited
+
+    visited = [[False]*m for _ in range(n)]
+    answer = 0
+    
+    while True:
+        end = 0
+        for i in range(n):
+            for j in range(m):
+                if board[i][j] == 1:
+                    answer += 1
+                    end = 1
+                    visited = bfs(i,j,visited)
+                    break
+        if end == 0: break 
+                    
+    print(answer)
