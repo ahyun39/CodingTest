@@ -3,7 +3,6 @@ from collections import deque
 n = int(input())
 board = [list(str(input())) for _ in range(n)]
 visited = [[False]*n for _ in range(n)]
-num = 0
 apart = []
 
 def bfs(x,y,cnt):
@@ -25,10 +24,9 @@ def bfs(x,y,cnt):
 for i in range(n):
     for j in range(n):
         if board[i][j] == '1' and not visited[i][j]:
-            num += 1
             apart.append(bfs(i,j,1))
-
-print(num)
+            
+print(len(apart))
 apart.sort()
 for a in apart:
     print(a)
