@@ -1,9 +1,6 @@
 n, m = map(int,input().split())
 names = {}
-for _ in range(n):
-    person = str(input())
-    names[person] = names.get(person,0) + 1
-for _ in range(m):
+for _ in range(n+m):
     person = str(input())
     names[person] = names.get(person,0) + 1
 ans = []
