@@ -1,2 +1,1 @@
-import math
-print(int(math.sqrt(int(input()))))
+print(int(int(input())**0.5))
