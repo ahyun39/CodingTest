@@ -1,37 +1,18 @@
-from collections import deque
-
 def is_right(p):
     left = 0
-    for i in range(len(p)):
-        if p[i] == "(": left += 1
-        else:
-            left -= 1
-            if left < 0: return False
-    if left > 0: return False
-    return True
+    for char in p:
+        left += 1 if char == "(" else -1
+        if left < 0: return False
+    return left == 0
 
 def divide(p):
     left = 0
-    for i in range(len(p)):
-        if p[i] == "(": left += 1
-        else:
-            left -= 1
-        if left == 0:
-            break
-    return p[:i+1], p[i+1:]
+    for i, char in enumerate(p):
+        left += 1 if char == "(" else -1
+        if left == 0: return p[:i+1], p[i+1:]
 
 def solution(p):
-    if p == '' or is_right(p): return p
-    else:
-        u, v = divide(p)
-        if is_right(u): 
-            return u + solution(v)
-        else:
-            a = '(' + solution(v) + ')'
-            for i in range(1,len(u)-1):
-                if u[i] == "(": a += ")"
-                else: a += "("
-            return a
-        
-        
-    
+    if not p or is_right(p): return p
+    u, v = divide(p)
+    if is_right(u): return u + solution(v)
+    return '(' + solution(v) + ')' + ''.join(')' if c == '(' else '(' for c in u[1:-1])
