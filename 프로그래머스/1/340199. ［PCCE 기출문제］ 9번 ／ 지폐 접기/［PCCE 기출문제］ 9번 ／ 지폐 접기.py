@@ -1,14 +1,6 @@
-answer = 0
-def solution(wallet, bill):
-    global answer
+def solution(wallet, bill, answer=0):
     if min(bill) <= min(wallet) and max(bill) <= max(wallet):
         return answer
-    if bill[0] > bill[1]:
-        bill[0] //= 2
-        answer += 1
-        solution(wallet, bill)
-    elif bill[0] <= bill[1]:
-        bill[1] //= 2
-        answer += 1
-        solution(wallet, bill)
-    return answer
+    idx = 0 if bill[0] > bill[1] else 1
+    bill[idx] //= 2
+    return solution(wallet, bill, answer + 1)
