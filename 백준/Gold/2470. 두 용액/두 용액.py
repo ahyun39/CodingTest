@@ -1,27 +1,22 @@
-import sys
-input=sys.stdin.readline
+def binary_search(liquids, N):
+    left, right = 0, N - 1
+    min_diff, ans = float('inf'), [0, 0]
 
-n = int(input())
-solutions = list(map(int,input().split()))
-solutions.sort()
+    while left < right:
+        liquid_sum = liquids[left] + liquids[right]
+        if min_diff > abs(liquid_sum):
+            min_diff = abs(liquid_sum)
+            ans = [liquids[left], liquids[right]]
+        if liquid_sum < 0:
+            left += 1
+        else:
+            right -= 1
 
-m = sys.maxsize # 찾고자 하는 부분합 M
+    return ans
 
-answer = []
-interval_sum = 0
+def f():
+    N = int(input())
+    liquids = sorted(list(map(int, input().split())))
+    print(*binary_search(liquids, N))
 
-start = 0
-end = n-1
-
-# start를 차례대로 증가시키며 반복
-while start < end:
-    interval_sum = solutions[start] + solutions[end]
-    if abs(interval_sum) < m:
-        m = abs(interval_sum)
-        answer = [solutions[start], solutions[end]]
-    if interval_sum < 0:
-        start += 1
-    else:
-        end -= 1
-
-print(*answer)
+f()
