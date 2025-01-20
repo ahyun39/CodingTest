@@ -1,38 +1,36 @@
 from collections import deque
 
-n, m, v = map(int,input().split())
-graph = [[] for _ in range(n+1)]
-visited_dfs = [False]*(n+1)
-visited_bfs = [False]*(n+1)
-
-for _ in range(m):
-    con = list(map(int,input().split()))
-    graph[con[0]].append(con[1])
-    graph[con[1]].append(con[0])
-
-for i in range(n+1):
-    graph[i].sort()
-
-def dfs(v):
-    visited_dfs[v] = True
+def dfs(graph, v, visited):
+    visited[v] = True
     print(v, end = ' ')
     for i in graph[v]:
-        if not visited_dfs[i]:
-            dfs(i)
+        if not visited[i]:
+            dfs(graph, i, visited)
 
-bfs_ = []
-def bfs(v):
-    q = deque()
-    q.append(v)
+def bfs(graph, V, N):
+    visited = [False] * (N + 1)
+    q = deque([V])
+    visited[V] = True
     while q:
         x = q.popleft()
-        if x not in bfs_: bfs_.append(x)
+        print(x, end = ' ')
         for i in graph[x]:
-            if not visited_bfs[i]:
+            if not visited[i]:
                 q.append(i)
-                visited_bfs[i] = True
+                visited[i] = True
 
-dfs(v)
-print('')
-bfs(v)
-print(*bfs_)
+def f():
+    N, M, V = map(int, input().split())
+    graph = [[] for _ in range(N+1)]
+    for _ in range(M):
+        a, b = map(int, input().split())
+        graph[a].append(b)
+        graph[b].append(a)
+    for i in range(N+1):
+        graph[i].sort()
+    visited = [False] * (N+1)
+    dfs(graph, V, visited)
+    print()
+    bfs(graph, V, N)
+
+f()
