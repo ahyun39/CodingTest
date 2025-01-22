@@ -1,32 +1,32 @@
 from collections import deque
 
-n = int(input())
-board = [list(str(input())) for _ in range(n)]
-visited = [[False]*n for _ in range(n)]
-apart = []
-
-def bfs(x,y,cnt):
-    q = deque()
-    q.append((x,y))
+def bfs(graph, i, j, visited):
+    q = deque([(i, j)])
+    cnt = 1
     while q:
         x, y = q.popleft()
         visited[x][y] = True
-        board[x][y] = '0'
-        for dx, dy in [(-1,0),(0,1),(0,-1),(1,0)]:
+        for dx, dy in [(-1,0), (0,1), (1,0), (0,-1)]:
             nx, ny = x + dx, y + dy
-            if 0 <= nx < n and 0 <= ny < n and board[nx][ny] == '1' and not visited[nx][ny]:
-                cnt += 1
+            if 0 <= nx < N and 0 <= ny < N and not visited[nx][ny] and graph[nx][ny] == '1':
                 visited[nx][ny] = True
-                board[nx][ny] = '0'
-                q.append((nx,ny))
+                q.append((nx, ny))
+                cnt += 1
     return cnt
+                
+def f():
+    global N
+    N = int(input())
+    graph = [input() for _ in range(N)]
+    
+    visited = [[False] * N for _ in range(N)]
+    apartment = []
+    for i in range(N):
+        for j in range(N):
+            if graph[i][j] == '1' and not visited[i][j]:
+                apartment.append(bfs(graph, i, j, visited))
+    apartment.sort()
+    print(len(apartment))
+    print(*apartment, sep='\n')
 
-for i in range(n):
-    for j in range(n):
-        if board[i][j] == '1' and not visited[i][j]:
-            apart.append(bfs(i,j,1))
-            
-print(len(apart))
-apart.sort()
-for a in apart:
-    print(a)
+f()
