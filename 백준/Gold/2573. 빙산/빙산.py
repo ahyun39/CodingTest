@@ -39,7 +39,7 @@ def count_iceberg_groups(graph, N, M, ice_locations):
                     visited[nx][ny] = True
 
     for x, y in ice_locations:
-        if graph[x][y] > 0 and not visited[x][y]:
+        if not visited[x][y]:
             bfs(x, y)
             groups += 1
     
