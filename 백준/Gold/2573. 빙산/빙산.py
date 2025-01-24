@@ -3,11 +3,12 @@ from collections import deque
 # 빙산 녹는것
 def melt_iceberg(graph, N, M):
     new_graph = [[0] * M for _ in range(N)]
+    directions = [(-1,0), (0,1), (1,0), (0,-1)]
     for i in range(N):
         for j in range(M):
             if graph[i][j] != 0:
                 sea_cnt = 0
-                for dx, dy in [(-1,0), (0,1), (1,0), (0,-1)]:
+                for dx, dy in directions:
                     nx, ny = i + dx, j + dy
                     if 0 <= nx < N and 0 <= ny < M and graph[nx][ny] == 0:
                         sea_cnt += 1
@@ -16,16 +17,16 @@ def melt_iceberg(graph, N, M):
 
 # 빙산 덩어리 구하기
 def count_iceberg(graph, N, M):
-    iceberg = 0
-    global visited
-    visited = [[False] * (M) for _ in range(N)]
+    iceberg_cnt = 0
 
+    visited = [[False] * (M) for _ in range(N)]
+    directions = [(-1,0), (0,1), (1,0), (0,-1)]
     def bfs(graph, i, j):
         q = deque([(i, j)])
         while q:
             x, y = q.popleft()
             visited[x][y] = True
-            for dx, dy in [(-1,0), (0,1), (1,0), (0,-1)]:
+            for dx, dy in directions:
                 nx, ny = x + dx, y + dy
                 if 0 <= nx < N and 0 <= ny < M and graph[nx][ny] != 0 and not visited[nx][ny]:
                     q.append((nx, ny))
@@ -35,9 +36,9 @@ def count_iceberg(graph, N, M):
         for j in range(M):
             if graph[i][j] != 0 and not visited[i][j]:
                 bfs(graph, i, j)
-                iceberg += 1
+                iceberg_cnt += 1
     
-    return iceberg
+    return iceberg_cnt
 
 def main():
     N, M = map(int, input().split())
