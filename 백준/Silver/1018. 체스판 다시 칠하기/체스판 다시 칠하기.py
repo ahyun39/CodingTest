@@ -1,26 +1,41 @@
-def min_repaints_to_chessboard(board, M, N):
-    chess1 = [['W' if (i+j) % 2 == 0 else 'B' for j in range(8)] for i in range(8)]
-    chess2 = [['B' if (i+j) % 2 == 0 else 'W' for j in range(8)] for i in range(8)]
+def check_pattern(board):
+    ori_board = {1:'WBWBWBWB', -1:'BWBWBWBW'}
+    first = board[0][0]
 
-    def count_repaints(x, y, pattern):
-        repaints = 0
-        for i in range(8):
-            for j in range(8):
-                if board[x+i][y+j] != pattern[i][j]:
-                    repaints += 1
-        return repaints
+    replace = 0
+    start = 1
+    for i in range(8):
+        check = ori_board[start]
+        for j in range(8):
+            if check[j] != board[i][j]:
+                replace += 1
+        start = -start
 
-    min_repaints = float('inf')
+    replace2 = 0
+    start = -1
+    for i in range(8):
+        check = ori_board[start]
+        for j in range(8):
+            if check[j] != board[i][j]:
+                replace2 += 1
+        start = -start
 
-    for i in range(M-7):
-        for j in range(N-7):
-            repaints1 = count_repaints(i, j, chess1)
-            repaints2 = count_repaints(i, j, chess2)
-            min_repaints = min(min_repaints, repaints1, repaints2)
+    return min(replace, replace2)
 
-    return min_repaints
+def f():
+    N, M = map(int, input().split())
+    board = [str(input()) for _ in range(N)]
 
-M, N = map(int, input().split())
-board = [input().strip() for _ in range(M)]
+    min_ans = float('inf')
 
-print(min_repaints_to_chessboard(board, M, N))
+    for i in range(N-7):
+        for j in range(M-7):
+            compare_board = []
+            for k in range(8):
+                compare_board.append(board[i+k][j:j+8])
+            replace = check_pattern(compare_board)
+            if min_ans > replace:
+                min_ans = replace
+    return min_ans
+
+print(f())
