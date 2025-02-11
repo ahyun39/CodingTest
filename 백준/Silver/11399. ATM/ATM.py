@@ -3,9 +3,7 @@ def atm():
     times = list(map(int, input().split()))
     times.sort()
 
-    ans = 0
-    for i in range(N):
-        ans += sum(times[:i+1])
+    ans = sum([sum(times[:i+1]) for i in range(N)])
     return ans
 
 print(atm())
