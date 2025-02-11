@@ -1,10 +1,11 @@
-n = int(input())
-time_n = list(map(int,input().split()))
-time_n = sorted(time_n)
-answer = 0
-for i in range(n):
-    take_time = 0
-    for j in range(i+1):
-        take_time += time_n[j]
-    answer += take_time
-print(answer)
+def atm():
+    N = int(input())
+    times = list(map(int, input().split()))
+    times.sort()
+
+    ans = 0
+    for i in range(N):
+        ans += sum(times[:i+1])
+    return ans
+
+print(atm())
