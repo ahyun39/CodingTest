@@ -3,7 +3,7 @@ def bellman(V, edges, start):
     dist = [INF] * (V+1)
     dist[start] = 0
 
-    for _ in range(V+1):
+    for _ in range(V):
         for u, v, w in edges:
             if dist[u] != INF and dist[u] + w < dist[v]:
                 dist[v] = dist[u] + w
