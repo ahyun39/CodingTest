@@ -36,7 +36,7 @@ def solution(words, queries):
     length_words = {}  # 길이별 단어 개수 저장
     
     # 단어들을 정방향 및 역방향 Trie에 삽입
-    for word in set(words):
+    for word in words:
         length = len(word)
         
         # 길이별 단어 개수 저장
