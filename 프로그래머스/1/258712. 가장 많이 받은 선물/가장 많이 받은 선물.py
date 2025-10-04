@@ -1,26 +1,25 @@
 def solution(friends, gifts):
     answer = 0
-    n = len(friends)
-    give_and_take = [[0]*n for _ in range(n)]
+    next_month_gift = []
+    gift_record = {friend:{friend:0 for friend in friends} for friend in friends}
+    gift_cnt = {friend:0 for friend in friends}
+    
     for gift in gifts:
-        a, b = map(str,gift.split())
-        give_and_take[friends.index(a)][friends.index(b)] += 1
-    gift_level = {}
-    for i in range(n):
-        p_give = sum(give_and_take[i])
-        p_receive = sum([give_and_take[j][i] for j in range(n)])
-        gift_level[friends[i]] = p_give - p_receive
-    for i in range(n):
+        give, receive = map(str, gift.split())
+        gift_record[give][receive] += 1
+        gift_cnt[give] += 1
+        gift_cnt[receive] -= 1
+    
+    for friend in friends:
+        give_take = gift_record[friend]
         cnt = 0
-        f = friends[i] # 대상 캐릭터
-        for j in range(n):
-            if i != j:
-                if give_and_take[i][j] > give_and_take[j][i]:
+        for f in friends:
+            if friend != f:
+                if give_take[f] > gift_record[f][friend]:
                     cnt += 1
-                if give_and_take[i][j] == give_and_take[j][i]:
-                    if gift_level[f] > gift_level[friends[j]]:
+                elif give_take[f] == gift_record[f][friend]:
+                    if gift_cnt[friend] > gift_cnt[f]:
                         cnt += 1
-        if answer < cnt:
-            answer = cnt
-            
-    return answer
+        next_month_gift.append(cnt)
+
+    return max(next_month_gift)
