@@ -1,19 +1,16 @@
 from collections import Counter
 
 def solution(N, stages):
-    answer = []
-    stage_dict = {i:0 for i in range(1,N+1)}
     stage_cnt = Counter(stages)
-
-    for stage in range(1, max(stages)):
-        # stage 이상 도달한 플레이어 수
-        stage_dict[stage] = sum(v for k, v in stage_cnt.items() if k >= stage)
-    
+    total_players = len(stages)
     failure = []
-    for i in range(1, N+1):
-        a, b = stage_cnt.get(i, 0), max(stage_dict[i],1)
-        failure.append((i, a/b))
-    failure.sort(key=lambda x:(-x[1], x[0]))
-    for k, v in failure:
-        answer.append(k)
-    return answer
+
+    for stage in range(1, N+1):
+        reached = total_players  # 현재 스테이지 이상 도달한 플레이어
+        fail = stage_cnt.get(stage, 0) / reached if reached > 0 else 0
+        failure.append((stage, fail))
+        total_players -= stage_cnt.get(stage, 0)  # 다음 스테이지 이상 도달자 수 업데이트
+
+    # 실패율 내림차순, 스테이지 번호 오름차순 정렬
+    failure.sort(key=lambda x: (-x[1], x[0]))
+    return [stage for stage, _ in failure]
