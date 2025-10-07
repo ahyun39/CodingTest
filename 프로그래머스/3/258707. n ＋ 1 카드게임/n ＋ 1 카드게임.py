@@ -3,7 +3,7 @@ from collections import deque
 def solution(coin, cards):
     n = len(cards)
     target = n + 1
-    hand = set(cards[:n//3])
+    hand = cards[:n//3]
     deck = deque(cards[n//3:])
     keep = []  # 뽑았지만 아직 손에 넣지 않은 카드들
     round_cnt = 1
@@ -34,10 +34,8 @@ def solution(coin, cards):
             for x in list(keep):
                 if target - x in hand:
                     keep.remove(x)
-                    hand.add(x)
                     coin -= 1
                     hand.remove(target - x)
-                    hand.remove(x)
                     used = True
                     round_cnt += 1
                     break
